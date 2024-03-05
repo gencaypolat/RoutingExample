@@ -16,11 +16,18 @@ app.UseEndpoints(endpoints =>
         await context.Response.WriteAsync($"In files - {fileName}.{extension}");
     });
 
-    endpoints.Map("employee/profile/{EmployeeName}", async (context) =>
+    endpoints.Map("employee/profile/{EmployeeName=john}", async (context) =>
     {
         string? employeeName = Convert.ToString(context.Request.RouteValues["employeename"]);
 
         await context.Response.WriteAsync($"In Employee profile - {employeeName}");
+    });
+
+    endpoints.Map("products/details/{id=1}", async (context) =>
+    {
+        int id = Convert.ToInt32(context.Request.RouteValues["id"]);
+
+        await context.Response.WriteAsync($"Products details - {id}");
     });
 });
 
